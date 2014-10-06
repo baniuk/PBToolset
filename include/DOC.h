@@ -1,0 +1,11 @@
+/** \mainpage PBToolset 
+* 
+* \section C_DumpAll 
+* Narzędzie pozwalające na zgrywanie do jednego pliku szeregu danych wraz z nazwami. 
+* Po wczytanie do matlaba zmienne są importowane do workspace wraz z nazwami nadanymi im podczas 
+* nagrywania
+* Struktura pliku:
+* 1. Unsigned int - ilość wpisów
+* 2. MAX_ENTRY*unsigned long - miejsce na kolejne wpisy - dane zawierające informacje o położeniu wpisu w pliku (offset)
+* \todo Add exceptions as error notifications
+*/
