@@ -1,4 +1,4 @@
-/**
+ï»¿/**
 * \file C_DumpAll.hpp
 * \brief Header file for C_Dump class
 * \author PB
@@ -55,7 +55,9 @@ public:
 private:
 	ofstream filedata;
 	unsigned int lastpozindex;				//index ostatniego wpisu w offset
-	unsigned long offset[MAX_ENTRY]; //offsety kolejnych wpisów
+	unsigned long offset[MAX_ENTRY]; //offsety kolejnych wpisÃ³w
+	/// Konwertuje string typeid na typ dataType
+	dataType decodeType(std::string _type);
 };
 
 /**
@@ -73,22 +75,10 @@ private:
 template<typename T>
 void C_DumpAll::AddEntry(const T* data,unsigned int size, const char* name)
 {
-	dataType type = dataType::UNSUPPORTED;  // type of data to write
+	dataType type;
 	unsigned long ile;	// number of writen bytes
 	unsigned int sl;	// length of data name
-	std::string name_of_type(typeid(data).name());	// copy name of T to string.
-	// mapping known types
-	if(name_of_type.find("float")!=string::npos)	// it is float
-		type = dataType::FLOAT;
-	if(name_of_type.find("double")!=string::npos)	// it is double
-		type = dataType::DOUBLE;
-	if(name_of_type.find("unsigned short")!=string::npos)
-		type = dataType::USHORT;
-	if(type==dataType::UNSUPPORTED)
-		throw std::logic_error("Unknown Type " + name_of_type);
-	if(lastpozindex >= MAX_ENTRY)
-		throw std::logic_error("Maximal entry number reached");
-
+	type = decodeType(typeid(data).name());
 	sl = static_cast<unsigned int>(strlen(name));
 	// we know type, now start to write data to disk
 	unsigned int itype = static_cast<unsigned int>(type);
@@ -100,7 +90,7 @@ void C_DumpAll::AddEntry(const T* data,unsigned int size, const char* name)
 	filedata.write(name, sizeof(char)*sl);				// name of variable saved as binary
 	// how many bytes has been written
 	ile = static_cast<unsigned long>(filedata.tellp() - start);
-	offset[lastpozindex] = ile; //ilosc zapisanych bajtów
+	offset[lastpozindex] = ile; //ilosc zapisanych bajtÃ³w
 	lastpozindex++;
 }
 #endif

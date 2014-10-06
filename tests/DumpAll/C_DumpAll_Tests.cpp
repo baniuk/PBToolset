@@ -1,4 +1,4 @@
-/**
+﻿/**
 * \file DumpAll_Tests.cpp
 * \brief Contains all tests for DumpAll
 * \author PB
