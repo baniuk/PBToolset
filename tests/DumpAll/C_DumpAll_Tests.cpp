@@ -8,6 +8,8 @@
 #include "DumpAll/C_DumpAll.hpp"
 #include "gtest/gtest.h"
 
+typedef unsigned short UINT16;
+
 int main(int argc, char* argv[])
 {
 	int ret = 0;
@@ -107,13 +109,22 @@ TEST(C_DumpAll,_emptyFile)
 TEST(C_DumpAll,_addEntry)
 {
 	bool exceptionThrown = false;
-	float tab[256];
-	for(int a=0; a<256; ++a)
-		tab[a] = static_cast<float>(a);	// tab filled by increasing numbers
+	float tabf[256];
+	double tabd[256];
+	UINT16 tab16[25];
+	for(int a=0; a<256; ++a){
+		tabf[a] = static_cast<float>(a);	// tab filled by increasing numbers
+		tabd[a] = static_cast<double>(a);	// tab filled by increasing numbers
+	}
+	for(int a=0;a<25;a++)
+		tab16[a] = static_cast<UINT16>(a);
 	try
 	{
-		C_DumpAll testObject("addentry");	// create file
-		testObject.AddEntry<float>(tab, 256, "char_256");
+		C_DumpAll testObject("matlab_addentry.dat");	// create file
+		testObject.AddEntry<float>(tabf, 256, "float_256");
+		testObject.AddEntry<double>(tabd, 256, "double_256");
+		testObject.AddEntry<UINT16>(tab16, 25, "uint16_25");
+		std::cout << "Verify this test in Matlab" << std::endl;
 	}
 	catch(std::ios_base::failure& ex)
 	{

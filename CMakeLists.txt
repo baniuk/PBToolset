@@ -1,11 +1,15 @@
 # CMake build script for PBToolset
 
+set(ROOT_PROJECT_NAME "PBToolset")
+
 cmake_minimum_required (VERSION 3.0.2)
-project("PBToolset")
+project(${ROOT_PROJECT_NAME})
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # set additional compiler flags
 IF (${WIN32})
-	# defaul RELEASE flags /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MP /MD /O2 /Ob2 /D NDEBUG
+	# default RELEASE flags /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MP /MD /O2 /Ob2 /D NDEBUG
 	SET(EXTRA_COMPILER_FLAGS "/MP")
 ELSEIF (${UNIX})
 	SET(EXTRA_COMPILER_FLAGS "") 
@@ -21,6 +25,8 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_COMPILER_FLAGS}" CACHE STRING ""
 file(MAKE_DIRECTORY lib)
 # create doc output directory that can be removed by clean-build
 file(MAKE_DIRECTORY doc)
+
+enable_language(RC)
 
 include(ExternalProject)
 add_subdirectory(External_dep)

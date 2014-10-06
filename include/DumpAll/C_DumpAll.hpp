@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_ENTRY 256 ///< Maximal number of entries in file
 
 /**
-* \class dataType
+* \enum dataType
 * \brief Defines correct types of handled data
 * \details Defines two types of data handled by library: \c double and \c float. Both are provided by pointers
 * therefore tables as well as single values are supported.
@@ -30,6 +30,7 @@ enum class dataType : unsigned int
 {
 	DOUBLE = 1,		///< table of doubles
 	FLOAT,			///< table of floats
+	USHORT,			///< 16bit unsigned integer
 	UNSUPPORTED		///< unsupported type
 };
 
@@ -58,7 +59,7 @@ private:
 };
 
 /**
-* \brief Adds data to dump file
+* \brief Adds one dimmensional data to dump file
 * \details Adds data on the end of file and then add entry in offsets table and modifies number of entries on the
 * beginig of the file. Supports only basic data types defined in \c dataType
 * \param[in] data pointer to data to be dumped to file
@@ -81,8 +82,10 @@ void C_DumpAll::AddEntry(const T* data,unsigned int size, const char* name)
 		type = dataType::FLOAT;
 	if(name_of_type.find("double")!=string::npos)	// it is double
 		type = dataType::DOUBLE;
+	if(name_of_type.find("unsigned short")!=string::npos)
+		type = dataType::USHORT;
 	if(type==dataType::UNSUPPORTED)
-		throw std::logic_error("Unknown Type");
+		throw std::logic_error("Unknown Type " + name_of_type);
 	if(lastpozindex >= MAX_ENTRY)
 		throw std::logic_error("Maximal entry number reached");
 
