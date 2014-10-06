@@ -1,11 +1,11 @@
 ﻿/**
-* \file C_DumpAll.cpp
+* \file C_MatlabExchange.cpp
 * \brief Class definition file for C_Dump class
 * \author PB
 * \date 2014/09/25
 */
 
-#include "DumpAll/C_DumpAll.hpp"
+#include "MatlabExchange/C_MatlabExchange.hpp"
 
 /**
 * \brief Main constructor
@@ -15,7 +15,7 @@
 * \exception ios_base::failbit - wrong conversion etc
 * \see C++ Programing language pp. 1080
 */
-C_DumpAll::C_DumpAll(const char* filename)
+C_MatlabExchange::C_MatlabExchange(const char* filename)
 {
 	// setting error handling to throwing exceptions on these situations
 	unsigned long datatowrite = 0;
@@ -27,7 +27,7 @@ C_DumpAll::C_DumpAll(const char* filename)
 		filedata.write((char*)&datatowrite,sizeof(unsigned long)); // przesówanie wskaźnika plików
 }
 
-C_DumpAll::~C_DumpAll(void)
+C_MatlabExchange::~C_MatlabExchange(void)
 {
 	filedata.seekp(ios::beg);		// begining of the file
 	filedata.write((char*)&lastpozindex, sizeof(unsigned int));	// number of entries
@@ -50,7 +50,7 @@ C_DumpAll::~C_DumpAll(void)
 * \exception std::logic_error - when MAX_ENTRY reached or unsuppoerted type of data
 * \see dataType
 */
-dataType C_DumpAll::decodeType(std::string _type, dim _dim)
+dataType C_MatlabExchange::decodeType(std::string _type, dim _dim)
 {
 	dataType type = dataType::UNSUPPORTED;  // type of data to write
 	std::string name_of_type(_type);	// copy name of T to string.
