@@ -5,7 +5,7 @@
 * \date 2014/09/26
 */
 
-#include "DumpAll/C_DumpAll.hpp"
+#include "MatlabExchange/C_MatlabExchange.hpp"
 #include "gtest/gtest.h"
 
 typedef unsigned short UINT16;
@@ -19,18 +19,18 @@ int main(int argc, char* argv[])
 }
 
 /**
-* \test C_DumpAll:_cantCreateFile
+* \test C_MatlabExchange:_cantCreateFile
 * \brief Try to Create nonexistent file.
 * \post Expect exception ios_base::badbit
 * \author PB
 * \date 2014/09/26
 */
-TEST(C_DumpAll,_cantCreateFile)
+TEST(C_MatlabExchange,_cantCreateFile)
 {
 	bool exceptionThrown = false;
 	try
 	{
-		C_DumpAll testObject("z:\\dupa");	// drive z do not exist
+		C_MatlabExchange testObject("z:\\dupa");	// drive z do not exist
 	}
 	catch(std::ios_base::failure& ex)
 	{
@@ -41,18 +41,18 @@ TEST(C_DumpAll,_cantCreateFile)
 }
 
 /**
-* \test C_DumpAll:_canCreateFile
+* \test C_MatlabExchange:_canCreateFile
 * \brief Try to Create existing file.
 * \post Do not expect exception
 * \author PB
 * \date 2014/09/26
 */
-TEST(C_DumpAll,_canCreateFile)
+TEST(C_MatlabExchange,_canCreateFile)
 {
 	bool exceptionThrown = false;
 	try
 	{
-		C_DumpAll testObject("dupa");
+		C_MatlabExchange testObject("dupa");
 	}
 	catch(std::ios_base::failure& ex)
 	{
@@ -63,20 +63,20 @@ TEST(C_DumpAll,_canCreateFile)
 }
 
 /**
-* \test C_DumpAll:emptyFile
+* \test C_MatlabExchange:emptyFile
 * \brief Test empty place for file structure created in constructor
 * \post Do not expect exception and expects fiile with MAX_ENTRY*sizeof(ULONG)+sizeof(UINT) bytes
 * \author PB
 * \date 2014/09/27
 */
-TEST(C_DumpAll,_emptyFile)
+TEST(C_MatlabExchange,_emptyFile)
 {
 	bool exceptionThrown = false;
 	unsigned int iloscWpisow;
 	unsigned long entry = 0;
 	try
 	{
-		C_DumpAll* testObject = new C_DumpAll("emptytest");	// create file
+		C_MatlabExchange* testObject = new C_MatlabExchange("emptytest");	// create file
 		delete testObject;									// close file
 		// check content of the file
 		std::ifstream readStream("emptytest");
@@ -100,13 +100,13 @@ TEST(C_DumpAll,_emptyFile)
 }
 
 /**
-* \test C_DumpAll:AddEntry1D
+* \test C_MatlabExchange:AddEntry1D
 * \brief Test AddEntry1D method
 * \post File with one entry containing chars from 0 to 255
 * \author PB
 * \date 2014/09/27
 */
-TEST(C_DumpAll,_addEntry1D)
+TEST(C_MatlabExchange,_addEntry1D)
 {
 	bool exceptionThrown = false;
 	float tabf[256];
@@ -120,7 +120,7 @@ TEST(C_DumpAll,_addEntry1D)
 		tab16[a] = static_cast<UINT16>(a);
 	try
 	{
-		C_DumpAll testObject("matlab_addentry.dat");	// create file
+		C_MatlabExchange testObject("matlab_addentry.dat");	// create file
 		testObject.AddEntry1D<float>(tabf, 256, "float_256");
 		testObject.AddEntry1D<double>(tabd, 256, "double_256");
 		testObject.AddEntry1D<UINT16>(tab16, 25, "uint16_25");
@@ -135,13 +135,13 @@ TEST(C_DumpAll,_addEntry1D)
 }
 
 /**
-* \test C_DumpAll:AddEntry2D
+* \test C_MatlabExchange:AddEntry2D
 * \brief Test AddEntry1D method
 * \post File with one entry containing chars from 0 to 255
 * \author PB
 * \date 2014/09/27
 */
-TEST(C_DumpAll,_addEntry2D)
+TEST(C_MatlabExchange,_addEntry2D)
 {
 	bool exceptionThrown = false;
 	float tabf[256];
@@ -153,7 +153,7 @@ TEST(C_DumpAll,_addEntry2D)
 		tab16[a] = static_cast<UINT16>(a);
 	try
 	{
-		C_DumpAll testObject("matlab_addentry2D.dat");	// create file
+		C_MatlabExchange testObject("matlab_addentry2D.dat");	// create file
 		testObject.AddEntry1D<float>(tabf, 256, "float_256");
 		testObject.AddEntry2D<UINT16>(tab16, 10, 10, "uint16_252D");
 		std::cout << "Verify this test in Matlab" << std::endl;
@@ -167,13 +167,13 @@ TEST(C_DumpAll,_addEntry2D)
 }
 
 /**
-* \test C_DumpAll:AddEntryWrongDataType
+* \test C_MatlabExchange:AddEntryWrongDataType
 * \brief Try to save unsupported data type
 * \post Exception std::logic_error
 * \author PB
 * \date 2014/09/28
 */
-TEST(C_DumpAll,AddEntryWrongDataType)
+TEST(C_MatlabExchange,AddEntryWrongDataType)
 {
 	bool exceptionThrown = false;
 	unsigned long tab[256];
@@ -181,7 +181,7 @@ TEST(C_DumpAll,AddEntryWrongDataType)
 		tab[a] = static_cast<unsigned long>(a);	// tab filled by increasing numbers
 	try
 	{
-		C_DumpAll testObject("addentry");	// create file
+		C_MatlabExchange testObject("addentry");	// create file
 		EXPECT_THROW(testObject.AddEntry1D<unsigned long>(tab, 256, "char_256"),std::logic_error);
 	}
 	catch(std::ios_base::failure& ex)	// check problem with file creating

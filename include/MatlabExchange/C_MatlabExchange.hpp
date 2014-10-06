@@ -1,5 +1,5 @@
 ﻿/**
-* \file C_DumpAll.hpp
+* \file C_MatlabExchange.hpp
 * \brief Header file for C_Dump class
 * \author PB
 * \date 2014/09/25
@@ -49,7 +49,7 @@ enum class dim : unsigned int
 	d2D
 };
 /**
-* \class C_DumpAll
+* \class C_MatlabExchange
 * \brief Defines main interface for saving data for Matlab
 * \details Represents object associated with file defined during construction. All data are saved to
 * this file according to calls to AddEntry1D method
@@ -57,18 +57,18 @@ enum class dim : unsigned int
 * \date 2014/09/25
 * \todo Add exeptions for errors
 */
-class C_DumpAll
+class C_MatlabExchange
 {
 public:
 	/// Main constructor
-	C_DumpAll(const char* filename);
+	C_MatlabExchange(const char* filename);
 	/// Adds 1D data of basic types
 	template<typename T>
 	void AddEntry1D(const T* data, unsigned int size, const char* name);
 	/// Adds 2D data of basic types
 	template<typename T>
 	void AddEntry2D(const T* data, unsigned int rows, unsigned int cols, const char* name);
-	~C_DumpAll(void);
+	~C_MatlabExchange(void);
 private:
 	ofstream filedata;
 	unsigned int lastpozindex;				//index ostatniego wpisu w offset
@@ -90,7 +90,7 @@ private:
 * \see dataType
 */
 template<typename T>
-void C_DumpAll::AddEntry1D(const T* data,unsigned int size, const char* name)
+void C_MatlabExchange::AddEntry1D(const T* data,unsigned int size, const char* name)
 {
 	dataType type;
 	unsigned long ile;	// number of writen bytes
@@ -131,7 +131,7 @@ void C_DumpAll::AddEntry1D(const T* data,unsigned int size, const char* name)
 * \warning Do not check if size_of_array == rows*cols, assumes that it is true
 */
 template<typename T>
-void C_DumpAll::AddEntry2D(const T* data,unsigned int rows, unsigned int cols, const char* name)
+void C_MatlabExchange::AddEntry2D(const T* data,unsigned int rows, unsigned int cols, const char* name)
 {
 	dataType type;
 	unsigned long ile;	// number of writen bytes

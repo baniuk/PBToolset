@@ -1,6 +1,6 @@
 /** \mainpage PBToolset 
 * 
-* \section C_DumpAll 
+* \section C_MatlabExchange 
 * Narzędzie pozwalające na zgrywanie do jednego pliku szeregu danych wraz z nazwami. 
 * Po wczytanie do matlaba zmienne są importowane do workspace wraz z nazwami nadanymi im podczas 
 * nagrywania
