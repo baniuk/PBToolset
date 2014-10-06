@@ -28,14 +28,30 @@ for a=1:ile
             nazwa_tmp = fread(fid,rozmiar_nazwy,'char')'; % nazwa
             nazwa = char(nazwa_tmp);
             assignin('base',nazwa,data);
-%         case 4
-%             row = fread(fid,1,'uint32');    % rozmiar r
-%             col = fread(fid,1,'uint32');    % rozmiar c
-%             data = fread(fid,[col,row],'double',0,'l')';    % dane
-%             rozmiar_nazwy = fread(fid,1,'uint32');  % rozmiar nazwy
-%             nazwa_tmp = fread(fid,rozmiar_nazwy,'char')'; % nazwa
-%             nazwa = char(nazwa_tmp);
-%             assignin('base',nazwa,data);    
+        case 4 % double 2D
+            row = fread(fid,1,'uint32');    % rozmiar r
+            col = fread(fid,1,'uint32');    % rozmiar c
+            data = fread(fid,[col,row],'double',0,'l')';    % dane
+            rozmiar_nazwy = fread(fid,1,'uint32');  % rozmiar nazwy
+            nazwa_tmp = fread(fid,rozmiar_nazwy,'char')'; % nazwa
+            nazwa = char(nazwa_tmp);
+            assignin('base',nazwa,data); 
+        case 5 % float 2D
+            row = fread(fid,1,'uint32');    % rozmiar r
+            col = fread(fid,1,'uint32');    % rozmiar c
+            data = fread(fid,[col,row],'float',0,'l')';    % dane
+            rozmiar_nazwy = fread(fid,1,'uint32');  % rozmiar nazwy
+            nazwa_tmp = fread(fid,rozmiar_nazwy,'char')'; % nazwa
+            nazwa = char(nazwa_tmp);
+            assignin('base',nazwa,data); 
+        case 6 % ushort 2D
+            row = fread(fid,1,'uint32');    % rozmiar r
+            col = fread(fid,1,'uint32');    % rozmiar c
+            data = fread(fid,[col,row],'uint16',0,'l')';    % dane
+            rozmiar_nazwy = fread(fid,1,'uint32');  % rozmiar nazwy
+            nazwa_tmp = fread(fid,rozmiar_nazwy,'char')'; % nazwa
+            nazwa = char(nazwa_tmp);
+            assignin('base',nazwa,data);      
         otherwise
             disp('Type not supported');
     end

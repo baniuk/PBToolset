@@ -100,13 +100,13 @@ TEST(C_DumpAll,_emptyFile)
 }
 
 /**
-* \test C_DumpAll:AddEntry
-* \brief Test AddEntry method
+* \test C_DumpAll:AddEntry1D
+* \brief Test AddEntry1D method
 * \post File with one entry containing chars from 0 to 255
 * \author PB
 * \date 2014/09/27
 */
-TEST(C_DumpAll,_addEntry)
+TEST(C_DumpAll,_addEntry1D)
 {
 	bool exceptionThrown = false;
 	float tabf[256];
@@ -121,9 +121,41 @@ TEST(C_DumpAll,_addEntry)
 	try
 	{
 		C_DumpAll testObject("matlab_addentry.dat");	// create file
-		testObject.AddEntry<float>(tabf, 256, "float_256");
-		testObject.AddEntry<double>(tabd, 256, "double_256");
-		testObject.AddEntry<UINT16>(tab16, 25, "uint16_25");
+		testObject.AddEntry1D<float>(tabf, 256, "float_256");
+		testObject.AddEntry1D<double>(tabd, 256, "double_256");
+		testObject.AddEntry1D<UINT16>(tab16, 25, "uint16_25");
+		std::cout << "Verify this test in Matlab" << std::endl;
+	}
+	catch(std::ios_base::failure& ex)
+	{
+		cerr << ex.what() << endl;
+		exceptionThrown = true;
+	}
+	EXPECT_FALSE(exceptionThrown);
+}
+
+/**
+* \test C_DumpAll:AddEntry2D
+* \brief Test AddEntry1D method
+* \post File with one entry containing chars from 0 to 255
+* \author PB
+* \date 2014/09/27
+*/
+TEST(C_DumpAll,_addEntry2D)
+{
+	bool exceptionThrown = false;
+	float tabf[256];
+	for(int a=0; a<256; ++a){
+		tabf[a] = static_cast<float>(a);	// tab filled by increasing numbers
+	}
+	UINT16 tab16[100];
+	for(int a=0;a<100;a++)
+		tab16[a] = static_cast<UINT16>(a);
+	try
+	{
+		C_DumpAll testObject("matlab_addentry2D.dat");	// create file
+		testObject.AddEntry1D<float>(tabf, 256, "float_256");
+		testObject.AddEntry2D<UINT16>(tab16, 10, 10, "uint16_252D");
 		std::cout << "Verify this test in Matlab" << std::endl;
 	}
 	catch(std::ios_base::failure& ex)
@@ -150,7 +182,7 @@ TEST(C_DumpAll,AddEntryWrongDataType)
 	try
 	{
 		C_DumpAll testObject("addentry");	// create file
-		EXPECT_THROW(testObject.AddEntry<unsigned long>(tab, 256, "char_256"),std::logic_error);
+		EXPECT_THROW(testObject.AddEntry1D<unsigned long>(tab, 256, "char_256"),std::logic_error);
 	}
 	catch(std::ios_base::failure& ex)	// check problem with file creating
 	{

@@ -42,27 +42,41 @@ C_DumpAll::~C_DumpAll(void)
 * w sposób możliwy do odczytania przez Matlaba
 * \param[in] _type typ zmiennej zwrócony przez typeid (łańcuch)
 * \code{cpp}
-* type = decodeType(typeid(data).name());
+* // decode type for 1D array
+* type = decodeType(typeid(data).name(), dim::d1D);
 * \endcode
 * \return kod typu danych
 * \retval dataType
 * \exception std::logic_error - when MAX_ENTRY reached or unsuppoerted type of data
 * \see dataType
 */
-dataType C_DumpAll::decodeType(std::string _type)
+dataType C_DumpAll::decodeType(std::string _type, dim _dim)
 {
 	dataType type = dataType::UNSUPPORTED;  // type of data to write
 	std::string name_of_type(_type);	// copy name of T to string.
 	// mapping known types
-	if(name_of_type.find("float")!=string::npos)	// it is float
-		type = dataType::FLOAT;
-	if(name_of_type.find("double")!=string::npos)	// it is double
-		type = dataType::DOUBLE;
-	if(name_of_type.find("unsigned short")!=string::npos)
-		type = dataType::USHORT;
+	switch(_dim)
+	{
+	case dim::d1D:
+		if(name_of_type.find("float")!=string::npos)	// it is float
+			type = dataType::FLOAT;
+		if(name_of_type.find("double")!=string::npos)	// it is double
+			type = dataType::DOUBLE;
+		if(name_of_type.find("unsigned short")!=string::npos)
+			type = dataType::USHORT;
+		break;
+	case dim::d2D:
+		if(name_of_type.find("float")!=string::npos)	// it is float
+			type = dataType::FLOAT2D;
+		if(name_of_type.find("double")!=string::npos)	// it is double
+			type = dataType::DOUBLE2D;
+		if(name_of_type.find("unsigned short")!=string::npos)
+			type = dataType::USHORT2D;
+		break;
+	default:
+		throw std::logic_error("Wrong dimmension");
+	}
 	if(type==dataType::UNSUPPORTED)
 		throw std::logic_error("Unknown Type " + name_of_type);
-	if(lastpozindex >= MAX_ENTRY)
-		throw std::logic_error("Maximal entry number reached");
 	return type;
 }
