@@ -7,5 +7,6 @@
 * Struktura pliku:
 * 1. Unsigned int - ilość wpisów
 * 2. MAX_ENTRY*unsigned long - miejsce na kolejne wpisy - dane zawierające informacje o położeniu wpisu w pliku (offset)
-* \todo Add exceptions as error notifications
+* 
+* Matlab code for reading containers: ImportDumpFile.m
 */
