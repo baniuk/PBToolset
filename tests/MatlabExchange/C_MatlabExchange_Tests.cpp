@@ -191,3 +191,30 @@ TEST(C_MatlabExchange,AddEntryWrongDataType)
 	}
 	EXPECT_FALSE(exceptionThrown);
 }
+
+/**
+* \test C_MatlabExchange_readData:_unique_ptr
+* \brief Try to save unsupported data type
+* \post Exception std::logic_error
+* \author PB
+* \date 2014/09/28
+*/
+TEST(C_MatlabExchange_readData,_unique_ptr)
+{
+	bool exceptionThrown = false;
+	std::unique_ptr<double[]> data;
+	unsigned int rows,cols;
+	try
+	{
+		C_MatlabExchange::ReadData("ddd", data, rows, cols);
+		for(unsigned int a=0; a<rows*cols; a++)
+			std::cout << data[a] << ",";
+		std::cout << std::endl;
+	}
+	catch(std::ios_base::failure& ex)	// check problem with file creating
+	{
+		cerr << ex.what() << endl;
+		exceptionThrown = true;
+	}
+	EXPECT_FALSE(exceptionThrown);
+}
