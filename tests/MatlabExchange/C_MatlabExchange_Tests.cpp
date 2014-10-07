@@ -199,7 +199,7 @@ TEST(C_MatlabExchange,AddEntryWrongDataType)
 * \author PB
 * \date 2014/09/28
 */
-TEST(C_MatlabExchange_readData,_readData)
+TEST(C_MatlabExchange_readData,DISABLED__readData)
 {
 	bool exceptionThrown = false;
 	std::unique_ptr<double[]> data;
