@@ -13,6 +13,7 @@
 #include <fstream>
 #include <exception>
 #include <typeinfo>
+#include <memory>
 using namespace std;
 
 #define MAX_ENTRY 256 ///< Maximal number of entries in file
@@ -68,6 +69,8 @@ public:
 	/// Adds 2D data of basic types
 	template<typename T>
 	void AddEntry2D(const T* data, unsigned int rows, unsigned int cols, const char* name);
+	/// Reads data from dat file
+	static void ReadData(const char* filename,  std::unique_ptr<double[]>& _data, unsigned int& rows, unsigned int& cols );
 	~C_MatlabExchange(void);
 private:
 	ofstream filedata;

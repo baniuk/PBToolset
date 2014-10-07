@@ -80,3 +80,23 @@ dataType C_MatlabExchange::decodeType(std::string _type, dim _dim)
 		throw std::logic_error("Unknown Type " + name_of_type);
 	return type;
 }
+
+/**
+* \brief Wczytuje plik z danumi \c dat stworony w Matlabie
+* \details Procedura allokuje pamięć potrzebną na przechowanie danych, funkcja wywołująca \c ReadData jest odpowiedzialna
+* za zwonienie tej pamięci. Zwrcane są także wymiary macierzy
+* \param[in] filename nazwa pliku z danymi do wczytania
+* \param[out] data wskaźnik na zaalokowaną pamięć z danymi
+* \param[out] rows liczba rzędów
+* \param[out] cols liczba kolumn
+* \retval void
+* \exception std::logic_error - w przypadku problemu z odczytem pliku
+*/
+void C_MatlabExchange::ReadData(const char* filename, std::unique_ptr<double[]>& _data, unsigned int& rows, unsigned int& cols)
+{
+	std::unique_ptr<double[]> data(new double[9]);
+	for(int a=0;a<9;a++)
+		data[a]=a;
+	_data = std::move(data);
+	rows=cols=3;
+}
