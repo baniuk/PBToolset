@@ -193,20 +193,20 @@ TEST(C_MatlabExchange,AddEntryWrongDataType)
 }
 
 /**
-* \test C_MatlabExchange_readData:_unique_ptr
+* \test C_MatlabExchange_readData:_readData
 * \brief Try to save unsupported data type
 * \post Exception std::logic_error
 * \author PB
 * \date 2014/09/28
 */
-TEST(C_MatlabExchange_readData,_unique_ptr)
+TEST(C_MatlabExchange_readData,_readData)
 {
 	bool exceptionThrown = false;
 	std::unique_ptr<double[]> data;
 	unsigned int rows,cols;
 	try
 	{
-		C_MatlabExchange::ReadData("ddd", data, rows, cols);
+		C_MatlabExchange::ReadData("magic3.dat", data, rows, cols);
 		for(unsigned int a=0; a<rows*cols; a++)
 			std::cout << data[a] << ",";
 		std::cout << std::endl;

@@ -82,21 +82,34 @@ dataType C_MatlabExchange::decodeType(std::string _type, dim _dim)
 }
 
 /**
-* \brief Wczytuje plik z danumi \c dat stworony w Matlabie
+* \brief Wczytuje plik z danumi \c dat stworzony w Matlabie
 * \details Procedura allokuje pamięć potrzebną na przechowanie danych, funkcja wywołująca \c ReadData jest odpowiedzialna
-* za zwonienie tej pamięci. Zwrcane są także wymiary macierzy
+* za zwonienie tej pamięci. Zwrcane są także wymiary macierzy. Format pliku:
+* [UINT32 rows][UINT32 cols][double*(rows*cols) data]
 * \param[in] filename nazwa pliku z danymi do wczytania
 * \param[out] data wskaźnik na zaalokowaną pamięć z danymi
 * \param[out] rows liczba rzędów
 * \param[out] cols liczba kolumn
 * \retval void
 * \exception std::logic_error - w przypadku problemu z odczytem pliku
+* \exception ios_base::badbit - on disk read error etc
+* \exception ios_base::failbit - wrong conversion etc
+* \remarks Domyślnie obsługuje tylko typ \c double
 */
 void C_MatlabExchange::ReadData(const char* filename, std::unique_ptr<double[]>& _data, unsigned int& rows, unsigned int& cols)
 {
-	std::unique_ptr<double[]> data(new double[9]);
-	for(int a=0;a<9;a++)
-		data[a]=a;
-	_data = std::move(data);
-	rows=cols=3;
+	std::ifstream input;
+	input.exceptions(input.exceptions() | ios_base::badbit | ios_base::failbit);
+	input.open(filename, ios_base::binary);
+	// read rows and cols
+	input.read((char*)&rows, sizeof(unsigned int));
+	input.read((char*)&cols, sizeof(unsigned int));
+	// allocate buffer
+	double* data = new double[rows*cols];
+	// read data
+	input.read((char*)data, sizeof(double)*rows*cols);
+	// make buffer unique
+	std::unique_ptr<double[]> u_data(data);
+	// move ownership to outside
+	_data = std::move(u_data);
 }

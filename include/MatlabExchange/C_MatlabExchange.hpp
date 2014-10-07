@@ -91,6 +91,7 @@ private:
 * \exception ios_base::failbit - wrong conversion etc
 * \exception std::logic_error - when MAX_ENTRY reached or unsuppoerted type of data
 * \see dataType
+* \ref ImportDumpFile.m
 */
 template<typename T>
 void C_MatlabExchange::AddEntry1D(const T* data,unsigned int size, const char* name)
