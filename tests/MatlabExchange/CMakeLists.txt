@@ -12,6 +12,7 @@ include_directories(${GTest_SRC}/include ${PBToolset_SOURCE_DIR}/include)
 add_executable(${LOCAL_PROJECT_NAME} C_MatlabExchange_Tests.cpp)
 # gtest specific
 target_compile_options(${LOCAL_PROJECT_NAME} PUBLIC -D_VARIADIC_MAX=10)
+# zmienna COMMON_EXT_LIB_OUTPUT jest ustawiana albo na poczatku albo pochodzi z nadrzędnego projektu i dotyczy tylko zewnętrznych i wspólnych projektów
 target_link_libraries(${LOCAL_PROJECT_NAME} ${COMMON_EXT_LIB_OUTPUT}/gtest${CMAKE_FIND_LIBRARY_SUFFIXES} ${COMMON_EXT_LIB_OUTPUT}/gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES})
 
 # linking with tested lib

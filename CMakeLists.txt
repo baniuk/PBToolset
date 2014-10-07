@@ -1,8 +1,10 @@
 # CMake build script for PBToolset
 
+cmake_minimum_required (VERSION 3.0.2)
+
+# do ustawienia
 set(ROOT_PROJECT_NAME "PBToolset")
 
-cmake_minimum_required (VERSION 3.0.2)
 project(${ROOT_PROJECT_NAME})
 
 # check if we are as subproject
