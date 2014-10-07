@@ -12,7 +12,7 @@ include_directories(${GTest_SRC}/include ${PBToolset_SOURCE_DIR}/include)
 add_executable(${LOCAL_PROJECT_NAME} C_MatlabExchange_Tests.cpp)
 # gtest specific
 target_compile_options(${LOCAL_PROJECT_NAME} PUBLIC -D_VARIADIC_MAX=10)
-target_link_libraries(${LOCAL_PROJECT_NAME} ${CMAKE_SOURCE_DIR}/lib/gtest${CMAKE_FIND_LIBRARY_SUFFIXES} ${CMAKE_SOURCE_DIR}/lib/gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES})
+target_link_libraries(${LOCAL_PROJECT_NAME} ${GTEST_LIB_OUTPUT}/gtest${CMAKE_FIND_LIBRARY_SUFFIXES} ${GTEST_LIB_OUTPUT}/gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES})
 
 # linking with tested lib
 target_link_libraries(${LOCAL_PROJECT_NAME} MatlabExchange)
