@@ -9,7 +9,9 @@ project(${ROOT_PROJECT_NAME})
 
 # check if we are as subproject
 IF (NOT COMMON_EXT_LIB_OUTPUT)
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	message("We are on main project level")
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	set(COMMON_EXT_LIB_OUTPUT ${CMAKE_SOURCE_DIR}/lib)
 	set(ROOT_PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR})
 ELSE (NOT COMMON_EXT_LIB_OUTPUT)
