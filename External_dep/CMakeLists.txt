@@ -1,27 +1,18 @@
 project("External_dep")
-IF (NOT IS_SUBPROJECT)
-	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	message("We are NOT on subproject level - GTEST BUILDED")
-	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	ExternalProject_Add(	googletest
-							# wszystko ląduje w Third_party/gtest
-							SOURCE_DIR ${ROOT_PROJECT_SOURCE_DIR}/External_dep/gtest
-							BINARY_DIR ${ROOT_PROJECT_SOURCE_DIR}/bin/External_dep
-							STAMP_DIR ${ROOT_PROJECT_SOURCE_DIR}/bin/External_dep/googletest-stamp
-							SVN_REPOSITORY http://googletest.googlecode.com/svn/trunk/
-							# Force separate output paths for debug and release builds to allow easy
-							# identification of correct lib in subsequent TARGET_LINK_LIBRARIES commands
-							CMAKE_ARGS -DCMAKE_CXX_FLAGS='-D_VARIADIC_MAX=10'
-								-DCMAKE_ARCHIVE_OUTPUT_DIRECTORY:PATH=${COMMON_EXT_LIB_OUTPUT}
-								-Dgtest_force_shared_crt=ON
-								-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-							# Disable install step
-							INSTALL_COMMAND ""
-							# Wrap download, configure and build steps in a script to log output
-							# LOG_DOWNLOAD ON
-						)
-ELSE
-	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	message("We are on subproject level - GTEST skipped")
-	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-ENDIF						
+ExternalProject_Add(	googletest
+						# wszystko ląduje w Third_party/gtest
+						SOURCE_DIR ${ROOT_PROJECT_SOURCE_DIR}/External_dep/gtest
+						BINARY_DIR ${ROOT_PROJECT_SOURCE_DIR}/bin/External_dep
+						STAMP_DIR ${ROOT_PROJECT_SOURCE_DIR}/bin/External_dep/googletest-stamp
+						SVN_REPOSITORY http://googletest.googlecode.com/svn/trunk/
+						# Force separate output paths for debug and release builds to allow easy
+						# identification of correct lib in subsequent TARGET_LINK_LIBRARIES commands
+						CMAKE_ARGS -DCMAKE_CXX_FLAGS='-D_VARIADIC_MAX=10'
+							-DCMAKE_ARCHIVE_OUTPUT_DIRECTORY:PATH=${COMMON_EXT_LIB_OUTPUT}
+							-Dgtest_force_shared_crt=ON
+							-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+						# Disable install step
+						INSTALL_COMMAND ""
+						# Wrap download, configure and build steps in a script to log output
+						# LOG_DOWNLOAD ON
+					)
