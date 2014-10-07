@@ -199,16 +199,20 @@ TEST(C_MatlabExchange,AddEntryWrongDataType)
 * \author PB
 * \date 2014/09/28
 */
-TEST(C_MatlabExchange_readData,DISABLED__readData)
+TEST(C_MatlabExchange_readData,_readData)
 {
 	bool exceptionThrown = false;
 	std::unique_ptr<double[]> data;
 	unsigned int rows,cols;
+	double expected[] = {8,1,6,3,5,7,4,9,2};
 	try
 	{
 		C_MatlabExchange::ReadData("magic3.dat", data, rows, cols);
 		for(unsigned int a=0; a<rows*cols; a++)
+		{
 			std::cout << data[a] << ",";
+			ASSERT_EQ(expected[a],data[a]);
+		}
 		std::cout << std::endl;
 	}
 	catch(std::ios_base::failure& ex)	// check problem with file creating

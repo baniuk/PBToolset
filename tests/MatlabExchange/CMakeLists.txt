@@ -1,5 +1,10 @@
 # rzeczy do zmiany
 set(LOCAL_PROJECT_NAME MatlabExchange_Test)
+# test case kopiowne z source do binary
+configure_file(	${CMAKE_CURRENT_SOURCE_DIR}/magic3.dat 
+				${CMAKE_CURRENT_BINARY_DIR}/magic3.dat
+				COPYONLY)
+
 
 project(${LOCAL_PROJECT_NAME})
 # get directory prefixes for libs and includes of external tools
