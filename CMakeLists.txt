@@ -1,9 +1,24 @@
 # CMake build script for PBToolset
 
+cmake_minimum_required (VERSION 3.0.2)
+
+# do ustawienia
 set(ROOT_PROJECT_NAME "PBToolset")
 
-cmake_minimum_required (VERSION 3.0.2)
 project(${ROOT_PROJECT_NAME})
+
+# check if we are as subproject
+IF (NOT COMMON_EXT_LIB_OUTPUT)
+	message("We are on main project level")
+	set(COMMON_EXT_LIB_OUTPUT ${CMAKE_SOURCE_DIR}/lib)
+	set(ROOT_PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR})
+ELSE (NOT COMMON_EXT_LIB_OUTPUT)
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	message("We are on subproject level:")
+	message("${COMMON_EXT_LIB_OUTPUT}")
+	message("${ROOT_PROJECT_SOURCE_DIR}")
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+ENDIF (NOT COMMON_EXT_LIB_OUTPUT)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
