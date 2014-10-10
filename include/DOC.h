@@ -9,4 +9,6 @@
 * 2. MAX_ENTRY*unsigned long - miejsce na kolejne wpisy - dane zawierające informacje o położeniu wpisu w pliku (offset)
 * 
 * Matlab code for reading containers: ImportDumpFile.m
+* 
+* MAtlab code for writing array: ExportArrayToFile.m
 */
