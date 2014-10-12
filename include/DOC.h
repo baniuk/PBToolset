@@ -10,5 +10,10 @@
 * 
 * Matlab code for reading containers: ImportDumpFile.m
 * 
-* MAtlab code for writing array: ExportArrayToFile.m
+* Matlab code for writing array: ExportArrayToFile.m
+* \section Geom
+* Zestaw klas obsługujących podstawową geometrię. W skład biblioteki wchodzą:
+* \li C_Point - obsługa punktów
+* \li C_Vector - obsługa wektorów
+* \li C_Line - obsługa linii
 */
