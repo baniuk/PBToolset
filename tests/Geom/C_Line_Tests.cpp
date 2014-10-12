@@ -261,7 +261,7 @@ TEST_F(C_LineApprox_Test1, getPointsOnLine_case1) {
 	double *x,*y;
 	C_Point P0(	1,0);
 	C_Point P1(	10,10);
-	double N = 10;
+	int N = 10;
 	bool ret;
 	x = new double[N];
 	y = new double[N];
