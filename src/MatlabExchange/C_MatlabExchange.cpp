@@ -95,6 +95,7 @@ dataType C_MatlabExchange::decodeType(std::string _type, dim _dim)
 * \exception ios_base::badbit - on disk read error etc
 * \exception ios_base::failbit - wrong conversion etc
 * \remarks Domyślnie obsługuje tylko typ \c double
+* \ref ExportArrayToFile.m
 */
 void C_MatlabExchange::ReadData(const char* filename, std::unique_ptr<double[]>& _data, unsigned int& rows, unsigned int& cols)
 {
