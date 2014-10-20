@@ -21,6 +21,16 @@ ELSE (NOT COMMON_EXT_LIB_OUTPUT)
 	message("${ROOT_PROJECT_SOURCE_DIR}")
 	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 ENDIF (NOT COMMON_EXT_LIB_OUTPUT)
+# If these variables are set in env build is performed offline:
+#	GTest_SVN_REPOSITORY - any value (gtest must be in /external_dep/gtest)
+IF(DEFINED ENV{GTest_SVN_REPOSITORY})
+	set(GTest_SVN_REPOSITORY "")
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	message("Use local gtest repo " External_dep/gtest)
+	message("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+ELSE ()
+	set(GTest_SVN_REPOSITORY http://googletest.googlecode.com/svn/trunk/) 
+ENDIF()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
