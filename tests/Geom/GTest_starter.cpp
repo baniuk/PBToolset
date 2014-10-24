@@ -1,6 +1,6 @@
 ﻿/**
-* \file C_Point_Tests.cpp
-* \brief Contains all tests for C_Point
+* \file GTest_starter.cpp
+* \brief Contains starter for google test API
 * \author PB
 * \date 2014/09/26
 */
