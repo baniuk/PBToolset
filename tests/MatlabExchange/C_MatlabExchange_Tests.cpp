@@ -1,5 +1,5 @@
 ﻿/**
-* \file DumpAll_Tests.cpp
+* \file C_MatlabExchange_Tests.cpp
 * \brief Contains all tests for DumpAll
 * \author PB
 * \date 2014/09/26

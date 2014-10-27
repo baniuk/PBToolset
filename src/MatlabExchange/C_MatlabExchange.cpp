@@ -41,6 +41,7 @@ C_MatlabExchange::~C_MatlabExchange(void)
 * \details Oeracja wymagana aby obsłużyć template metody \c AddEntry tak aby mogła ona zapisać kod typu danych w kontenerze
 * w sposób możliwy do odczytania przez Matlaba
 * \param[in] _type typ zmiennej zwrócony przez typeid (łańcuch)
+* \param[in] _dim wymiarowość tablicy (1D lub 2D)
 * \code{cpp}
 * // decode type for 1D array
 * type = decodeType(typeid(data).name(), dim::d1D);
@@ -87,7 +88,7 @@ dataType C_MatlabExchange::decodeType(std::string _type, dim _dim)
 * za zwonienie tej pamięci. Zwrcane są także wymiary macierzy. Format pliku:
 * [UINT32 rows][UINT32 cols][double*(rows*cols) data]
 * \param[in] filename nazwa pliku z danymi do wczytania
-* \param[out] data wskaźnik na zaalokowaną pamięć z danymi
+* \param[out] _data wskaźnik na zaalokowaną pamięć z danymi
 * \param[out] rows liczba rzędów
 * \param[out] cols liczba kolumn
 * \retval void
