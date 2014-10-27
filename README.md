@@ -16,7 +16,7 @@ This project depends on:
  3. Doxygen for documentation building (on local or system path)
  4. Graphviz package (on local or system path)
 
-### Build ###   
+### Build ###
 The following scripts available:
 
  * `./clean-build.bat` - clears everything and run cmake and then make, results are in `bin` and `lib`. Runs also all tests
